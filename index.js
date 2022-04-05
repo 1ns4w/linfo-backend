@@ -1,12 +1,12 @@
 import puppeteer from "puppeteer"
 import Fastify from "fastify"
 
-const fast = Fastify({logger: true})
+let fast = Fastify({logger: true})
 
 fast.get("/", async(request, response) => {
-    const browser = await puppeteer.launch(headless: true, args: ["--no-sandbox"])
-    const page = await browser.newPage()
-    const pageDOM = await (await page.goto('https://example.com')).text()
+    let browser = await puppeteer.launch(headless: true, args: ["--no-sandbox"])
+    let page = await browser.newPage()
+    let pageDOM = await (await page.goto('https://example.com')).text()
     await browser.close()
     response.type("text/html").send(pageDOM)
 })
