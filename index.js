@@ -8,12 +8,12 @@ fast.get("/", async(request, response) => {
     const page = await browser.newPage()
     const pageDOM = await (await page.goto('https://example.com')).text()
     await browser.close()
-    return pageDOM
+    response.type("text/html").send(pageDOM)
 })
 
 const start = async () => {
     try {
-        await fast.listen(process.env.PORT || 3000, '0.0.0.0')
+        await fast.listen(process.env.PORT, '0.0.0.0')
     }
     catch (err) {
         fast.log.error(err)
