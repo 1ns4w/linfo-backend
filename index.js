@@ -11,7 +11,7 @@ fast.register(fastifyCors, {
 })
 
 fast.get("/", async(request, response) => {
-    let browser = await puppeteer.launch({headless: true, args: ["--no-sandbox"]})
+    let browser = await puppeteer.launch({headless: false})
     let page = await browser.newPage()
     let pageDOM = await (await page.goto('https://example.com')).text()
     await browser.close()
@@ -21,7 +21,7 @@ fast.get("/", async(request, response) => {
 fast.get('/scrap/:keyword', async(request, response) => {
     const typeOptions = {delay: 100}
     const pageOptions = {timeout: 90000, waitUntil: 'networkidle2'}
-    const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox"]})
+    const browser = await puppeteer.launch({headless: false})
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
     await page.waitForXPath('//input[@autocomplete="username"]')
