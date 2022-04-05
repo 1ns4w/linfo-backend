@@ -4,7 +4,7 @@ import Fastify from "fastify"
 const fast = Fastify({logger: true})
 
 fast.get("/", async(request, response) => {
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch(headless: true, args: ["--no-sandbox"])
     const page = await browser.newPage()
     const pageDOM = await (await page.goto('https://example.com')).text()
     await browser.close()
