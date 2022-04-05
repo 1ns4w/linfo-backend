@@ -37,7 +37,7 @@ fast.get('/scrap/:keyword', async(request, response) => {
 
 const start = async () => {
     try {
-        await fast.listen(process.env.PORT || 3000, '0.0.0.0')
+        await fast.listen(process.env.PORT, '0.0.0.0')
     }
     catch (err) {
         fast.log.error(err)
