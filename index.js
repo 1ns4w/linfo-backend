@@ -1,7 +1,6 @@
 import puppeteer from "puppeteer"
 import Fastify from "fastify"
 import fastifyCors from "fastify-cors"
-import {} from "dotenv/config"
 
 let fast = Fastify({logger: true})
 
