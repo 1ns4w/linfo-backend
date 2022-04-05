@@ -25,8 +25,8 @@ fast.get('/scrap/:keyword', async(request, response) => {
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
     await page.waitForXPath('//input[@autocomplete="username"]')
-    const usernameInput = (await page.$x('//input[@autocomplete="username"]'))[0]
-    const passwordInput = (await page.$x('//input[@autocomplete="current-password"]'))[0]
+    const [usernameInput] = await page.$x('//input[@autocomplete="username"]')
+    const [passwordInput] = await page.$x('//input[@autocomplete="current-password"]')
     await usernameInput.type(process.env.LINKEDIN_BOT_EMAIL, typeOptions)
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
     await passwordInput.press('Enter')
