@@ -20,7 +20,7 @@ fast.get("/", async(request, response) => {
 
 fast.get('/scrap/:keyword', async(request, response) => {
     const typeOptions = {delay: 100}
-    const pageOptions = {timeout: 90000, waitUntil: 'networkidle2'}
+    const pageOptions = { waitUntil: 'networkidle2'}
     const browser = await puppeteer.launch({headless: false})
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
@@ -30,7 +30,9 @@ fast.get('/scrap/:keyword', async(request, response) => {
     await usernameInput.type(process.env.LINKEDIN_BOT_EMAIL, typeOptions)
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
     await passwordInput.press('Enter')
+    console.log("feed")
     await page.waitForNavigation(pageOptions)
+   console.log("xd")
     const title = page.title()
     await browser.close()
     return title
