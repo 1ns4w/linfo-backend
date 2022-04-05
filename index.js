@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer"
 import Fastify from "fastify"
 
-const fast = Fastify()
+const fast = Fastify({logger: true})
 
 fast.get("/", async(request, response) => {
     const browser = await puppeteer.launch()
