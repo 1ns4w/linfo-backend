@@ -20,9 +20,8 @@ fast.get("/", async(request, response) => {
 
 fast.get('/scrap/:keyword', async(request, response) => {
     const typeOptions = {delay: 100}
-    const pageOptions = {timeout: 60000, waitUntil: 'networkidle2'}
-    const { keyword } = request.params
-    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']})
+    const pageOptions = {timeout: 90000, waitUntil: 'networkidle2'}
+    const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox"]})
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
     await page.waitForXPath('//input[@autocomplete="username"]')
@@ -32,9 +31,9 @@ fast.get('/scrap/:keyword', async(request, response) => {
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
     await passwordInput.press('Enter')
     await page.waitForNavigation(pageOptions)
-    await page.waitForSelector('ul')
-    const text = await (await page.goto(`https://www.linkedin.com/search/results/all/?keywords=${keyword}`, pageOptions)).text()
-    response.type("text/html").send(text)
+    const title = page.title()
+    await browser.close()
+    return title
 })
 
 const start = async () => {
