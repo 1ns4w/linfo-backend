@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "dependencies": {
+    "fastify": "^3.27.4",
+    "puppeteer": "^13.5.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}
