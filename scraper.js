@@ -4,7 +4,7 @@ import {} from 'dotenv/config'
 const scrap = async (url) => {
     const typeOptions = { delay: 100 }
     const pageOptions = { timeout: 90000, waitUntil: 'networkidle2' }
-    const browser = await puppeteer.launch({ headless: true })
+    const browser = await puppeteer.launch({ headless: false })
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
     await page.waitForXPath('//input[@autocomplete="username"]')
@@ -19,10 +19,10 @@ const scrap = async (url) => {
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
-        await page.goto(personURL, pageOptions)
-        const title = await page.title()
+        const tmpPage = await browser.newPage()
+        await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'domcontentloaded' })
+        const title = await tmpPage.title()
         console.log(title)
-        await page.goBack(pageOptions)
     }
 
     await browser.close()
