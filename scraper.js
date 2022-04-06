@@ -16,10 +16,10 @@ const scrap = async (url) => {
     await page.waitForNavigation({ timeout: 90000, waitUntil: 'domcontentloaded' })
     await page.goto(url, pageOptions)
     const people = await page.$x('//a[contains(@class, "app-aware-link") and ./span]')
+    const tmpPage = await browser.newPage()
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
-        const tmpPage = await browser.newPage()
         await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'domcontentloaded' })
         const title = await tmpPage.title()
         console.log(title)
