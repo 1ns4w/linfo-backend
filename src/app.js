@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer'
 import { scrollPageToBottom } from 'puppeteer-autoscroll-down'
 import {} from 'dotenv/config'
-import { scrapProfile } from './scraper'
+import { scrapProfile } from 'scraper'
 
 const scrap = async (url) => {
     const typeOptions = { delay: 100 }
