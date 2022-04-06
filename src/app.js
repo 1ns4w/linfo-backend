@@ -19,13 +19,14 @@ const scrap = async (url) => {
     await page.goto(url, pageOptions)
     const people = await page.$x('//a[contains(@class, "app-aware-link") and ./span]')
     const tmpPage = await browser.newPage()
+    await tmpPage.exposeFunction("scrapProfile", scrapProfile);
 
     let scrapedProfiles = []
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
         await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'networkidle2' })
-        const scrapedProfile = await scrapProfile();
+        const scrapedProfile = await page.evaluate( async () => await scrapProfile() );
         console.log(scrapedProfile)
         scrapedProfiles.push(scrapedProfile)
     }
