@@ -5,7 +5,8 @@
     "bullmq": "^1.78.2",
     "fastify": "^3.27.4",
     "fastify-cors": "^6.0.3",
-    "puppeteer": "^13.5.2"
+    "puppeteer": "^13.5.2",
+    "puppeteer-autoscroll-down": "^1.1.1"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",

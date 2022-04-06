@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer'
+import { scrollPageToBottom } from 'puppeteer-autoscroll-down'
 import {} from 'dotenv/config'
+import { scrapProfile } from 'scraper'
 
 const scrap = async (url) => {
     const typeOptions = { delay: 100 }
@@ -18,14 +20,18 @@ const scrap = async (url) => {
     const people = await page.$x('//a[contains(@class, "app-aware-link") and ./span]')
     const tmpPage = await browser.newPage()
 
+    let scrapedProfiles = []
+
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
-        await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'domcontentloaded' })
-        const title = await tmpPage.title()
-        console.log(title)
+        await tmpPage.goto(personURL, pageOptions)
+        const scrapedProfile = await scrapProfile()
+        console.log(scrapedProfile)
+        scrapedProfiles.push(scrapedProfile)
     }
 
     await browser.close()
+    console.log(scrapedProfiles)
 }
 
 scrap('https://www.linkedin.com/search/results/people/?keywords=fullstack')

@@ -1144,6 +1144,11 @@ pupa@^2.1.1:
   dependencies:
     escape-goat "^2.0.0"
 
+puppeteer-autoscroll-down@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/puppeteer-autoscroll-down/-/puppeteer-autoscroll-down-1.1.1.tgz#895062605143893c74117f69eefa63a237795c90"
+  integrity sha512-NT0/bO4QBCwMPUhTcTItGojP3W9SNQL/VaW57x8bC3HTraQ2qjicZzf0c4ysNvOHwZf/NMMZxscuTymXZ18sGA==
+
 puppeteer@^13.5.2:
   version "13.5.2"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.5.2.tgz#73ae84969cbf514aeee871a05ec4549d67f6abee"
