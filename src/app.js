@@ -1,6 +1,5 @@
-import puppeteer from 'puppeteer'
-import { scrollPageToBottom } from 'puppeteer-autoscroll-down'
 import {} from 'dotenv/config'
+import puppeteer from 'puppeteer'
 import { scrapProfile } from './scraper.js'
 
 const scrap = async (url) => {
@@ -12,6 +11,7 @@ const scrap = async (url) => {
     await page.waitForXPath('//input[@autocomplete="username"]')
     const [usernameInput] = await page.$x('//input[@autocomplete="username"]')
     const [passwordInput] = await page.$x('//input[@autocomplete="current-password"]')
+    console.log("a")
     await usernameInput.type(process.env.LINKEDIN_BOT_EMAIL, typeOptions)
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
     await passwordInput.press('Enter')
