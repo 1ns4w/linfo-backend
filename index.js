@@ -12,6 +12,7 @@ let state = {}
 
 let scrapData
 
+
 fast.register(fastifyCors, {
     origin: "*",
     methods: ["POST", "GET"]
