@@ -1,11 +1,11 @@
-import { Person } from "./modules/models/Person";
-import { WorkExperience } from "./modules/models/Work";
-import { loadPageContent } from "./modules/helpers/autoscroll";
-import { evaluateXPath } from "./modules/helpers/evaluateXPath"
-import { cleanText} from "./modules/helpers/cleantext"
-import { getSectionXPath } from "./modules/helpers/getSectionXPath";
-import { sleep } from "./modules/helpers/sleep";
-import { SECTION_DROPDOWN_CLUE, SECTION_ITEMS, SECTION_ITEM_COMPANY, SECTION_ITEM_DURATION_INFO, SECTION_ITEM_HISTORY_CLUE, SECTION_ITEM_POSITION, SECTION_ITEM_WITH_HISTORY_COMPANY_OR_POSITION, SECTION_ITEM_WITH_HISTORY_DURATION_INFO, SECTION_RETURN_CLUE } from "./modules/utils/XPathConstants";
+import { Person } from "./modules/models/Person.js";
+import { WorkExperience } from "./modules/models/Work.js";
+import { loadPageContent } from "./modules/helpers/autoscroll.js";
+import { evaluateXPath } from "./modules/helpers/evaluateXPath.js"
+import { cleanText} from "./modules/helpers/cleantext.js"
+import { getSectionXPath } from "./modules/helpers/getSectionXPath.js";
+import { sleep } from "./modules/helpers/sleep.js";
+import { SECTION_DROPDOWN_CLUE, SECTION_ITEMS, SECTION_ITEM_COMPANY, SECTION_ITEM_DURATION_INFO, SECTION_ITEM_HISTORY_CLUE, SECTION_ITEM_POSITION, SECTION_ITEM_WITH_HISTORY_COMPANY_OR_POSITION, SECTION_ITEM_WITH_HISTORY_DURATION_INFO, SECTION_RETURN_CLUE } from "./modules/utils/XPathConstants.js";
 
 const findSection = (sectionClue) => {
     return evaluateXPath(getSectionXPath(sectionClue), document).iterateNext();
