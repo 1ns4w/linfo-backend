@@ -26,7 +26,7 @@ const scrap = async (url) => {
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
         await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'networkidle2' })
-        const scrapedProfile = await tmpPage.evaluateHandle( async () => scrapProfile() );
+        const scrapedProfile = await tmpPage.evaluateHandle( () => scrapProfile() );
         console.log(scrapedProfile)
         scrapedProfiles.push(scrapedProfile)
     }
