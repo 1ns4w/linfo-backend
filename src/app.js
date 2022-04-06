@@ -5,7 +5,7 @@ import { scrapProfile } from './scraper.js'
 const scrap = async (url) => {
     const typeOptions = { delay: 100 }
     const pageOptions = { timeout: 90000, waitUntil: 'networkidle2' }
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
     await page.waitForXPath('//input[@autocomplete="username"]')
@@ -24,8 +24,8 @@ const scrap = async (url) => {
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
-        await tmpPage.goto(personURL, pageOptions)
-        const scrapedProfile = await tmpPage.evaluate(async() => await scrapProfile())
+        await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'networkidle2' })
+        const scrapedProfile = await scrapProfile();
         console.log(scrapedProfile)
         scrapedProfiles.push(scrapedProfile)
     }
