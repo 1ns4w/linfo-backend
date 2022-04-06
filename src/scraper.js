@@ -76,8 +76,8 @@ const scrapSection = async (sectionName) => {
 
 export const scrapProfile = async () => {
 
+    console.log("ha")
     await loadPageContent();
-
     let fullname = document.getElementsByTagName("h1")[0].textContent;
     let workExperience = await scrapSection("experience");
     let education = await scrapSection("education");

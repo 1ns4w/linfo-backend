@@ -25,7 +25,7 @@ const scrap = async (url) => {
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
         await tmpPage.goto(personURL, pageOptions)
-        const scrapedProfile = await scrapProfile()
+        const scrapedProfile = await tmpPage.evaluate(async() => await scrapProfile())
         console.log(scrapedProfile)
         scrapedProfiles.push(scrapedProfile)
     }
