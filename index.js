@@ -51,8 +51,7 @@ const start = async () => {
 
 const worker = new Worker('foo', async job =>{
     
-    const typeOptions = {delay: 100}
-    const pageOptions = { waitUntil: 'networkidle2'}
+    
     const browser = await puppeteer.launch({headless: true})
     const page = await browser.newPage()
     await page.goto('https://www.linkedin.com/', pageOptions)
