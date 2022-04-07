@@ -17,15 +17,12 @@ const scrap = async (url) => {
     const people = await page.$x('//a[contains(@class, "app-aware-link") and ./span]')
     const tmpPage = await browser.newPage()
 
-    const test = () => document.documentElement.scrollHeight
-    tmpPage.exposeFunction("test", test)
-
     let scrapedProfiles = []
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
         await tmpPage.goto(personURL, {timeout: 300000, ...pageOptions})
-        const scrapedProfile = await tmpPage.evaluate( () => test() )
+        const scrapedProfile = await tmpPage.title()
         scrapedProfiles.push(scrapedProfile)
         console.log(scrapedProfile)
     }
