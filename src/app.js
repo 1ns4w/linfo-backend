@@ -11,7 +11,6 @@ const scrap = async (url) => {
     await page.waitForXPath('//input[@autocomplete="username"]')
     const [usernameInput] = await page.$x('//input[@autocomplete="username"]')
     const [passwordInput] = await page.$x('//input[@autocomplete="current-password"]')
-    console.log("a")
     await usernameInput.type(process.env.LINKEDIN_BOT_EMAIL, typeOptions)
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
     await passwordInput.press('Enter')
@@ -26,7 +25,7 @@ const scrap = async (url) => {
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
         await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'networkidle2' })
-        const scrapedProfile = await tmpPage.evaluateHandle( () => scrapProfile() );
+        const scrapedProfile = await tmpPage.evaluate( () => scrapProfile() );
         console.log(scrapedProfile)
         scrapedProfiles.push(scrapedProfile)
     }
