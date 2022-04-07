@@ -1,6 +1,5 @@
 import {} from 'dotenv/config'
 import puppeteer from 'puppeteer'
-import { scrapProfile } from './scraper.js'
 
 const scrap = async (url) => {
     const typeOptions = { delay: 100 }
@@ -14,21 +13,21 @@ const scrap = async (url) => {
     console.log("a")
     await usernameInput.type(process.env.LINKEDIN_BOT_EMAIL, typeOptions)
     await passwordInput.type(process.env.LINKEDIN_BOT_PASSWORD, typeOptions)
+    console.log("a")
     await passwordInput.press('Enter')
     await page.waitForNavigation({ timeout: 90000, waitUntil: 'domcontentloaded' })
     await page.goto(url, pageOptions)
     const people = await page.$x('//a[contains(@class, "app-aware-link") and ./span]')
     const tmpPage = await browser.newPage()
-    await tmpPage.exposeFunction("scrapProfile", scrapProfile);
 
     let scrapedProfiles = []
 
     for (const person of people) {
         const personURL = await page.evaluate(a => a.href, person)
-        await tmpPage.goto(personURL, { timeout: 90000, waitUntil: 'networkidle2' })
-        const scrapedProfile = await tmpPage.evaluateHandle( () => scrapProfile() );
-        console.log(scrapedProfile)
-        scrapedProfiles.push(scrapedProfile)
+        await tmpPage.goto(personURL, { timeout: 200000, waitUntil: 'networkidle2' })
+        const title = await tmpPage.title()
+        console.log(title)
+        scrapedProfiles.push(title)
     }
 
     await browser.close()
